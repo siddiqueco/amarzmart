@@ -1,0 +1,32 @@
+.card:hover {
+  text-decoration: none;
+  /* -webkit-box-shadow: 0px 1px 5px 0px rgb(189, 186, 180);
+  box-shadow: 0px 1px 6px 0px rgba(189, 186, 180, 0.267); */
+
+  -webkit-box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 54%);
+-moz-box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 54%);
+box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 64%);
+}
+.card {
+  text-decoration: none;
+  
+}
+.card:hover img {
+  padding: 6px;
+}
+
+.product-img {
+  transition: all 0.4s ease-in-out;
+  min-height: 170px;
+  padding: 12px;
+}
+.card-title {
+  color: rgba(45, 55, 72, 1);
+  margin-top: 20px;
+  line-height: 18px;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.card-title:hover {
+  text-decoration: none !important;
+}

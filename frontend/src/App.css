@@ -1,0 +1,29 @@
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.rating{
+   font-size: 16px;
+}
+
+
+.my-shadow{
+   box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.1);
+   -webkit-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.1);
+   -moz-box-shadow: 0px 2px 92px 0px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 576px) {
+  .text-center-sm {
+    text-align: center !important;
+  }
+}

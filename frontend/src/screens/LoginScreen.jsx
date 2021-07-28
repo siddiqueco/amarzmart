@@ -1,34 +1,34 @@
-import React,{useState,useEffect} from 'react'
-import {Link} from 'react-router-dom'
-import {Form,Button,Row,Col} from 'react-bootstrap'
-import {useDispatch,useSelector} from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Form, Button, Row, Col } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import {login} from '../actions/userAction'
+import { login } from '../actions/userAction'
 import FormContainer from '../components/FormContainer'
 
-const LoginScreen = ({location,history}) => {
-    const [email,setEmail] = useState('')
-    const [password, setPassword]= useState('')
+const LoginScreen = ({ location, history }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    const dispatch= useDispatch()
+    const dispatch = useDispatch()
 
     const userLogin = useSelector(state => state.userLogin)
 
-    const {loadig, error, userInfo}= userLogin
+    const { loadig, error, userInfo } = userLogin
 
-    const redirect= location.search? location.search.split('=')[1]: '/'
+    const redirect = location.search ? location.search.split('=')[1] : '/'
 
-    useEffect(()=>{
-        if(userInfo){
+    useEffect(() => {
+        if (userInfo) {
             history.push(redirect)
         }
-    },[history,userInfo,redirect])
+    }, [history, userInfo, redirect])
 
-    const submitHandler=(e)=>{
+    const submitHandler = (e) => {
         e.preventDefault()
 
-        dispatch(login(email,password))
+        dispatch(login(email, password))
 
     }
 
@@ -61,7 +61,7 @@ const LoginScreen = ({location,history}) => {
                     Submit
                 </Button>
             </Form>
-            
+
             <Row className='py-3'>
                 <Col>
                     New Customer? <Link to={redirect? `/register?redirect=${redirect}`: '/register'}>Register</Link>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listUsers, deleteUser } from '../actions/userAction'
+import { toast } from 'react-toastify'
 
 const UserListScreen = ({ history }) => {
 
@@ -34,8 +35,11 @@ const UserListScreen = ({ history }) => {
     if (window.confirm('Are you sure')) {
       dispatch(deleteUser(id))
     }
+    if(successDelete ===true){
+      toast('User deleted succesfully')
+    }
   }
-
+console.log(successDelete)
   return (
     <>
       <h1>Users</h1>
@@ -46,12 +50,12 @@ const UserListScreen = ({ history }) => {
       ) : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
-            <tr>
+            <tr className='text-center'>
               <th>ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
-              <th>ADMIN</th>
-              <th></th>
+              <th >ADMIN</th>
+              <th >ACTION</th>
             </tr>
           </thead>
           <tbody>
@@ -62,23 +66,24 @@ const UserListScreen = ({ history }) => {
                 <td>
                   <a href={`mailto:${user.email}`}>{user.email}</a>
                 </td>
-                <td>
+                <td className='text-center'>
                   {user.isAdmin ? (
                     <i className='fas fa-check' style={{ color: 'green' }}></i>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
-                <td>
+                <td className='text-center'>
                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
-                      <i className='fas fa-edit'></i>
+                    <Button variant='info' className='btn-sm'>
+                    <i class="fas fa-user-edit"></i>
                     </Button>
                   </LinkContainer>
                   <Button
                     variant='danger'
                     className='btn-sm'
                     onClick={() => deleteHandler(user._id)}
+                    style={{marginLeft:'10px'}}
                   >
                     <i className='fas fa-trash'></i>
                   </Button>

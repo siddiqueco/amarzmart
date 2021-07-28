@@ -19,15 +19,15 @@ const OrderListScreen = ({ history }) => {
 
 
 
-   useEffect(()=>{
+  useEffect(() => {
 
-     if(userInfo && userInfo.isAdmin){
-       dispatch(listOrders())
-     }else{
-       history.push('/login')
-     }
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders())
+    } else {
+      history.push('/login')
+    }
 
-   },[dispatch,history,userInfo])
+  }, [dispatch, history, userInfo])
 
 
 
@@ -40,8 +40,8 @@ const OrderListScreen = ({ history }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Table striped bordered hover responsive className='table-sm'>
-          <thead>
-            <tr>
+          <thead className='text-center'>
+            <tr >
               <th>ID</th>
               <th>USER</th>
               <th>DATE</th>
@@ -54,11 +54,11 @@ const OrderListScreen = ({ history }) => {
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
-                <td>{order.createdAt.substring(0,10)}</td>
+                <td>{order.createdAt.substring(0, 10)}</td>
                 <td><span className='tk'>৳</span>{order.totalPrice}</td>
                 <td>
                   {order.isDelivered ? (
-                    order.deliveredAt.substring(0,10)
+                    order.deliveredAt.substring(0, 10)
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}

@@ -1,3 +1,8 @@
+
+body{
+  background-color: #F7F8FA;
+}
+
 main{
     min-height: 80vh;
 }
@@ -14,7 +19,9 @@ h2{
 }
 .rating span{
     margin: 0.1rem;
+    font-size: .875rem;
 }
+
 .tk{
     font-size: 22px !important;
     font-weight: bold;
@@ -55,4 +62,8 @@ h2{
   .carousel-caption h2 {
     font-size: 2.5vw;
   }
+}
+
+.container{
+  padding: 0 !important;
 }

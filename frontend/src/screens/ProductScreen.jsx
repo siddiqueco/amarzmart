@@ -12,6 +12,8 @@ import {
 } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstant'
 
+
+
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
@@ -60,7 +62,7 @@ const ProductScreen = ({ history, match }) => {
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
-        Go Back
+      <i className="fas fa-angle-left font-size-16"></i> Go Back
       </Link>
       {loading ? (
         <Loader />

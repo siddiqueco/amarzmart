@@ -4,51 +4,51 @@ import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails , deliverOrder} from '../actions/orderAction'
-import {ORDER_DELIVER_RESET} from '../constants/orderConstant'
+import { getOrderDetails, deliverOrder } from '../actions/orderAction'
+import { ORDER_DELIVER_RESET } from '../constants/orderConstant'
 
 
 
-const OrderScreen = ({ match,  history }) => {
+const OrderScreen = ({ match, history }) => {
 
     const dispatch = useDispatch()
 
     const orderId = match.params.id
 
     const userLogin = useSelector(state => state.userLogin)
-    const {userInfo}= userLogin
+    const { userInfo } = userLogin
 
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
 
     const orderDeliver = useSelector(state => state.orderDeliver)
-    const {loading:loadingDeliver, success:successDeliver}= orderDeliver
+    const { loading: loadingDeliver, success: successDeliver } = orderDeliver
 
     if (!loading) {
         //   Calculate prices
         const addDecimals = (num) => {
             return (Math.round(num * 100) / 100).toFixed(2)
         }
-  
+
         order.itemsPrice = addDecimals(
             order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
         )
     }
 
     useEffect(() => {
-        if(!userInfo){
+        if (!userInfo) {
             history.push('/login')
         }
-        
-        if(!order || successDeliver){
-            dispatch({type: ORDER_DELIVER_RESET})
+
+        if (!order || successDeliver) {
+            dispatch({ type: ORDER_DELIVER_RESET })
             dispatch(getOrderDetails(orderId))
         }
 
-    }, [dispatch,orderId,order,successDeliver])
+    }, [dispatch, orderId, order, successDeliver])
 
 
-    const deliverHandler = () =>{
+    const deliverHandler = () => {
         dispatch(deliverOrder(order))
     }
 
@@ -67,7 +67,7 @@ const OrderScreen = ({ match,  history }) => {
                                 <p>
                                     <strong>Email: </strong>{order.user.email}
                                 </p>
-                                
+
                                 <p>
                                     <strong>Address:</strong>
                                     {order.shippingAddress.address},
@@ -78,7 +78,7 @@ const OrderScreen = ({ match,  history }) => {
                                 </p>
                                 {order.isDelivered ? (
                                     <Message variant='success'>Delivered On {order.deliveredAt}</Message>
-                                ):(
+                                ) : (
                                     <Message variant='danger'>Not delivered</Message>
                                 )}
                             </ListGroup.Item>
@@ -94,31 +94,31 @@ const OrderScreen = ({ match,  history }) => {
                                 {order.orderItems.length === 0 ? (
                                     <Message>Order is empty</Message>
                                 ) : (
-                                        <ListGroup variant='flush'>
-                                            {order.orderItems.map((item, index) => (
-                                                <ListGroup.Item key={index}>
-                                                    <Row>
-                                                        <Col md={1}>
-                                                            <Image
-                                                                src={item.image}
-                                                                alt={item.name}
-                                                                fluid
-                                                                rounded
-                                                            />
-                                                        </Col>
-                                                        <Col>
-                                                            <Link to={`/product/${item.product}`}>
-                                                                {item.name}
-                                                            </Link>
-                                                        </Col>
-                                                        <Col md={4}>
-                                                            {item.qty} x <span className='tk'>৳</span>{item.price} = <span className='tk'>৳</span>{item.qty * item.price}
-                                                        </Col>
-                                                    </Row>
-                                                </ListGroup.Item>
-                                            ))}
-                                        </ListGroup>
-                                    )}
+                                    <ListGroup variant='flush'>
+                                        {order.orderItems.map((item, index) => (
+                                            <ListGroup.Item key={index}>
+                                                <Row>
+                                                    <Col md={1}>
+                                                        <Image
+                                                            src={item.image}
+                                                            alt={item.name}
+                                                            fluid
+                                                            rounded
+                                                        />
+                                                    </Col>
+                                                    <Col>
+                                                        <Link to={`/product/${item.product}`}>
+                                                            {item.name}
+                                                        </Link>
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        {item.qty} x <span className='tk'>৳</span>{item.price} = <span className='tk'>৳</span>{item.qty * item.price}
+                                                    </Col>
+                                                </Row>
+                                            </ListGroup.Item>
+                                        ))}
+                                    </ListGroup>
+                                )}
                             </ListGroup.Item>
                         </ListGroup>
                     </Col>
@@ -159,13 +159,13 @@ const OrderScreen = ({ match,  history }) => {
 
                                 {loadingDeliver && <Loader />}
                                 {userInfo && userInfo.isAdmin && !order.isDelivered && (
-                                    <ListGroup.Item> 
+                                    <ListGroup.Item>
                                         <Button type='button' className='btn btn-block' onClick={deliverHandler}>
                                             Mark as Delivered
                                         </Button>
                                     </ListGroup.Item>
                                 )}
-                                
+
                             </ListGroup>
                         </Card>
                     </Col>
