@@ -1,0 +1,73 @@
+.my-pd-rw {
+  height: 75px;
+  background: var(--white);
+  margin-bottom: 10px;
+}
+@media (max-width: 960px) {
+  .my-pd-rw {
+    height: 60px;
+    cursor: pointer;
+  }
+}
+
+
+.my-pd-ono {
+  padding: 17px 15px;
+}
+.my-pd-ono a {
+  font-size: 16px;
+  font-weight: 700;
+}
+.my-pd-pr {
+  padding-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.my-pd-sts {
+  padding-top: 25px;
+  padding-right: 25px;
+}
+
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.my-button button {
+  padding: 5px !important;
+  font-size: 12px !important;
+  line-height: 10px !important;
+}
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: middle;
+}
+.my-w40 {
+  width: 40% !important;
+  float: left !important;
+}
+.my-w30 {
+  width: 30% !important;
+  float: left !important;
+}
+.my-w20 {
+  width: 20%!important;
+  float: left!important;
+}
+.mt-4, .my-4 {
+  margin-top: 1.5rem!important;
+}
+
+/* global class */
+.hb-ef {
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+.text-right {
+  text-align: right !important;
+}

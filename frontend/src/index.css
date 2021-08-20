@@ -1,36 +1,54 @@
-
-body{
-  background-color: #F7F8FA;
+:root {
+  --bg-primary: #f7f8fa;
+  --bg-primar2: #f2f3f8;
+}
+:root {
+  --primary: #38b449;
+  --hov-primary: #28a745;
+  --soft-primary: rgba(56,180,73,0.15);
+  --bg-footer: #111723;
+}
+a,
+button,
+input,
+textarea,
+.btn,
+.has-transition {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-main{
-    min-height: 80vh;
-}
-h3{
-    padding: 1rem 0;
-}
-h1{
-    font-size: 1.8 rem;
-    padding: 0.1 rem;
-}
-h2{
-    font-size: 1.4 rem;
-    padding: 0.5rem 0;
-}
-.rating span{
-    margin: 0.1rem;
-    font-size: .875rem;
+body {
+  background-color: #f7f8fa;
 }
 
-.tk{
-    font-size: 22px !important;
-    font-weight: bold;
+main {
+  min-height: 80vh;
 }
-.tk1{
-    font-size: 22px !important;
-    font-weight: bold;
+h3 {
+  padding: 1rem 0;
+}
+h1 {
+  font-size: 1.8 rem;
+  padding: 0.1 rem;
+}
+h2 {
+  font-size: 1.4 rem;
+  padding: 0.5rem 0;
+}
+.rating span {
+  margin: 0.1rem;
+  font-size: 0.875rem;
 }
 
+.tk {
+  font-size: 22px !important;
+  font-weight: bold;
+}
+.tk1 {
+  font-size: 22px !important;
+  font-weight: bold;
+}
 
 /* carousel */
 .carousel-item-next,
@@ -64,6 +82,6 @@ h2{
   }
 }
 
-.container{
+.container {
   padding: 0 !important;
 }

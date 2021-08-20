@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Product from '../components/ProductCard/ProductCard'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listProducts } from '../actions/productActions'
+import { listProducts, listTopProducts } from '../actions/productActions'
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
 import Meta from '../components/Meta'
@@ -22,12 +22,14 @@ const HomeScreen = ({ match }) => {
     const productList = useSelector(state => state.productList)
     const { loading, error, products, page, pages } = productList
 
+
     const topRatedProductList = useSelector(state => state.productTopRated)
     const { loading: loadingTop, products: topRatedProduct } = topRatedProductList
 
-    console.log(topRatedProduct)
+
     useEffect(() => {
         dispatch(listProducts(keyword, pageNumber))
+        dispatch(listTopProducts())
     }, [dispatch, keyword, pageNumber])
 
 
@@ -42,20 +44,24 @@ const HomeScreen = ({ match }) => {
                 iconColor='#e68332'
                 icon={<i className="fas fa-fire"></i>}
             />
-            <Row>
-                {topRatedProduct.map((product) => (
-                    <Col key={product._id} sm={4} md={3} lg={2.5} xl={2}>
-                        <Product product={product} />
-                    </Col>
-                ))}
-            </Row>
+            {
+                loadingTop ? <Loader /> : (
+                    <Row>
+                        {topRatedProduct && topRatedProduct.map((product) => (
+                            <Col key={product._id} sm={4} md={3} lg={2.5} xl={2}>
+                                <Product product={product} />
+                            </Col>
+                        ))}
+                    </Row>
+                )
+            }
 
             {/* <h2 className='mt-3 text-center-sm'>Latest Products</h2> */}
             <Title
                 text='Latest Products'
                 textColor='#F57224'
                 iconColor='#ffae00'
-                icon={<i class="far fa-smile-beam"></i>}
+                ico                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         n={<i class="far fa-smile-beam"></i>}
             />
             {loading ?
                 <Loader /> : error ? (
@@ -65,13 +71,14 @@ const HomeScreen = ({ match }) => {
                         <Row>
                             {products.map((product) => (
                                 <Col key={product._id} sm={4} md={3} lg={2.5} xl={2}>
-                                    <Product product={product} />
+                                    {loading ? (<Loader />) : (<Product product={product} />)}
                                 </Col>
                             ))}
                         </Row>
                         <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
                     </>
-                )}
+                )
+            }
 
         </>
     )

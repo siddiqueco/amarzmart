@@ -1,25 +1,17 @@
-.card:hover {
-  text-decoration: none;
-  /* -webkit-box-shadow: 0px 1px 5px 0px rgb(189, 186, 180);
-  box-shadow: 0px 1px 6px 0px rgba(189, 186, 180, 0.267); */
-
-  -webkit-box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 54%);
--moz-box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 54%);
-box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 64%);
-}
 .card {
   text-decoration: none;
-  
+}
+
+.card:hover {
+  text-decoration: none;
+  -webkit-box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 54%);
+  -moz-box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 54%);
+  box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 64%);
 }
 .card:hover img {
   padding: 6px;
 }
 
-.product-img {
-  transition: all 0.4s ease-in-out;
-  min-height: 170px;
-  padding: 12px;
-}
 .card-title {
   color: rgba(45, 55, 72, 1);
   margin-top: 20px;
@@ -30,3 +22,60 @@ box-shadow: 1px 2px 10px -7px rgb(0 0 0 / 64%);
 .card-title:hover {
   text-decoration: none !important;
 }
+.product-img {
+  transition: all 0.4s ease-in-out;
+  min-height: 170px;
+  padding: 12px;
+}
+.price-cart-icon-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 26px;
+}
+.add-to-cart-button {
+  display: flex;
+  padding: 10px;
+  width: inherit;
+  /* align-items: center; */
+  font-size: 15px;
+  border-radius: 50%;
+  background-color: #f7f8fa;
+  box-shadow: 0px -3px 4px 0px rgba(184, 180, 177, 0.75);
+  color: var(--primary);
+  transition: all 0.3s ease-in-out;
+}
+.add-to-cart-button:hover
+ {
+  cursor: pointer;
+  font-size: 18px !important;
+  box-shadow: 0px 3px 4px 0px rgb(184 180 177 / 75%);
+  -webkit-box-shadow: 0px 3px 4px 0px rgb(184 180 177 / 75%);
+  -moz-box-shadow: 0px 3px 4px 0px rgb(184 180 177 / 75%);
+}
+.add-to-cart-button:disabled {
+  opacity: .65;
+  color: var(--bg-footer);
+  font-size: 15px !important;
+  cursor: initial;
+}
+
+.product-price {
+  display: flex;
+  font-size: 18px;
+  margin-bottom: 0;
+  color: var(--primary);
+}
+
+/* @media screen and (max-width: 820px) {
+  .add-to-cart-button {
+    width: inherit;
+  }
+} */
+/* input[type="button"]:disabled {
+  color: var(--bg-footer);
+  font-size: 15px !important;
+  cursor: none;
+} */
+

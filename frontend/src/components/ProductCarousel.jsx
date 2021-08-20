@@ -4,16 +4,16 @@ import { Carousel, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from './Loader'
 import Message from './Message'
-import { listTopProducts } from '../actions/productActions'
+import { listTopThreeProducts } from '../actions/productActions'
 
 const ProductCarousel = () => {
   const dispatch = useDispatch()
 
-  const productTopRated = useSelector((state) => state.productTopRated)
+  const productTopRated = useSelector((state) => state.productTopThree)
   const { loading, error, products } = productTopRated
 
   useEffect(() => {
-    dispatch(listTopProducts())
+    dispatch(listTopThreeProducts())
   }, [dispatch])
 
   return loading ? (
@@ -21,14 +21,14 @@ const ProductCarousel = () => {
   ) : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
-    <Carousel pause='hover' className='bg-dark shadow-sm'>
+    <Carousel pause='hover' className='bg-dark shadow-sm' touch={true}>
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
             <Image src={product.image} alt={product.name} fluid />
             <Carousel.Caption className='carousel-caption'>
-              <h2>
-                {product.name} (<span className='tk'>৳</span>{product.price})
+              <h2 >
+                {product.name} (<span className=' tk '>৳</span>{product.price})
               </h2>
             </Carousel.Caption>
           </Link>

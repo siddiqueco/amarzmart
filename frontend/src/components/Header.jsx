@@ -14,15 +14,20 @@ const Header = () => {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
+
+
+
   const logoutHandler = () => [
     dispatch(logout())
   ]
   return (
     <header >
-      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect sticky="top">
+      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect >
         <Container>
-          <LinkContainer to='/' style={{ fontSize: '1.5rem' }}>
-            <Navbar.Brand >Amarshop<i className='fab fa-typo3' /></Navbar.Brand>
+          <LinkContainer to='/' style={{ fontSize: '1.5rem' }} >
+            <Navbar.Brand >Amarshop<i className='fab fa-typo3 header-brand-icon' /></Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -30,17 +35,23 @@ const Header = () => {
             <Nav className="ml-auto">
               <LinkContainer to='/cart'>
                 <Nav.Link className='text-sm'>
-                  <i class="fas fa-shopping-bag"></i> Cart
+                  <span className='header-cart-icon'>
+                    <i className="fas fa-shopping-cart text-sm"></i>
+
+                  </span>
+                  <span className='badge header-cart-icon-value'>
+                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                  </span>
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id='username' className='text-sm'>
-                  <LinkContainer to='/profile'>
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <LinkContainer to='/account'>
+                    <NavDropdown.Item>My Account</NavDropdown.Item>
                   </LinkContainer>
 
                   {/* need to be edited */}
-                  <LinkContainer to='/order/my-order'>
+                  <LinkContainer to='/account/orders'>
                     <NavDropdown.Item>My order</NavDropdown.Item>
                   </LinkContainer>
                   {/* skjd */}

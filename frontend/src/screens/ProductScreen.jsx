@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstant'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -10,11 +11,11 @@ import {
   listProductDetails,
   createProductReview,
 } from '../actions/productActions'
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstant'
-
+import { addToCart } from '../actions/cartActions'
 
 
 const ProductScreen = ({ history, match }) => {
+  const productId = match.params.id
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
@@ -46,7 +47,8 @@ const ProductScreen = ({ history, match }) => {
   }, [dispatch, match, successProductReview])
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
+    // history.push(`/cart/${productId}?qty=${qty}`)
+    dispatch(addToCart(productId, qty))
   }
 
   const submitHandler = (e) => {
@@ -61,8 +63,8 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <>
-      <Link className='btn btn-light my-3' to='/'>
-      <i className="fas fa-angle-left font-size-16"></i> Go Back
+      <Link className='btn btn-primary my-3' to='/'>
+        <i className="fas fa-angle-left font-size-16"></i> Go Back
       </Link>
       {loading ? (
         <Loader />
@@ -152,7 +154,10 @@ const ProductScreen = ({ history, match }) => {
           </Row>
           <Row>
             <Col md={6}>
-              <h2>Reviews</h2>
+              <div className='ml-3 mt-3'>
+                <h4>Ratings & Reviews of {product.name}</h4>
+              </div>
+
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant='flush'>
                 {product.reviews.map((review) => (

@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import classes from './Title.module.css'
 
-const Title = ({ text, textColor, icon, iconColor }) => {
+const Title = ({ text, textColor, icon, iconColor,className }) => {
    return (
       <>
-         <h2 className={`${classes.titleText} text-center-sm mt-2`} style={{ color: textColor? textColor:'#3e3f3a' }}>
+         <h2 className={`${classes.titleText} ${className} text-center-sm `} style={{ color: textColor? textColor:'#3e3f3a' }}>
             {text} {icon && <span style={iconColor && { color: iconColor }}>{icon}</span>}
          </h2>
       </>

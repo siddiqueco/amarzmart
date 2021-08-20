@@ -44,10 +44,10 @@ const RegisterScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='name'>
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Full Name</Form.Label>
           <Form.Control
             type='name'
-            placeholder='Enter name'
+            placeholder='Enter full name here'
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>

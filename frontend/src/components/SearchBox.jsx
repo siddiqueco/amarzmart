@@ -25,7 +25,7 @@ const SearchBox = ({ history }) => {
         style={{minWidth:'350px'}}
       ></Form.Control>
       <Button type='submit' variant='outline-light' className='p-2' style={{minWidth:'80px'}}>
-        Search  <i class="fas fa-search"></i>
+        Search  <i className="fas fa-search"></i>
       </Button>
     </Form>
   )
