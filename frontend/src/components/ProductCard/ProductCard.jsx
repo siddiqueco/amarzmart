@@ -5,19 +5,29 @@ import { useDispatch, useSelector } from 'react-redux'
 import Rating from "../Rating";
 import "./ProductCard.css";
 import { addToCart } from '../../actions/cartActions'
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const Product = ({ product }) => {
   const [qty, setQty] = useState(1)
   const productId = product._id
-  const dispatch= useDispatch()
+  const dispatch = useDispatch()
   const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product:ProductStock } = productDetails
-  
+  const { loading, error, product: ProductStock } = productDetails
+
   const addToCartHandler = (e, id) => {
     e.preventDefault()
     setQty(qty + 1)
-    dispatch(addToCart(id,qty))
+    dispatch(addToCart(id, qty))
+    toast.success('Item Added to cart', {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: false,
+      autoClose: 3000,
+    });
   }
 
 
@@ -26,6 +36,7 @@ const Product = ({ product }) => {
       className="my-2"
       style={{ width: "180px", height: "322px" }}
     >
+     
       <Link to={`/product/${product._id}`}>
         <Card.Img className="product-img img-fluid" src={product.image} variant="top" />
       </Link>
@@ -51,7 +62,7 @@ const Product = ({ product }) => {
           {/* <Card.Text as="div" style={{ fontSize: "18px", display: 'inline-block', float: 'right' }}>
               cart
             </Card.Text> */}
-          <button className='btn add-to-cart-button' onClick={(e) => addToCartHandler(e, product._id)} disabled={product.countInStock ==0}>
+          <button className='btn add-to-cart-button' onClick={(e) => addToCartHandler(e, product._id)} disabled={product.countInStock == 0}>
             <i class="fas fa-cart-plus"></i>        {/*  add to cart ico */}
           </button>
         </div>

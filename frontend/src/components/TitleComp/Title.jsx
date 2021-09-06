@@ -17,7 +17,7 @@ Title.propTypes = {
    text: PropTypes.string.isRequired,
    textColor: PropTypes.string,
    icon: PropTypes.any,
-   icon: PropTypes.string
+   iconColor: PropTypes.string
 };
 
 export default Title

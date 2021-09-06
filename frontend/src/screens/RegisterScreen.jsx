@@ -6,6 +6,8 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userAction'
+import nodemailer from 'nodemailer'
+
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -27,14 +29,31 @@ const RegisterScreen = ({ location, history }) => {
     }
   }, [history, userInfo, redirect])
 
+
+
+
+
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
+
+
+
       dispatch(register(name, email, password))
     }
   }
+
+
+
+
+
+
+
+
+
+
 
   return (
     <FormContainer>

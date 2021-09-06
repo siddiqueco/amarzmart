@@ -5,6 +5,8 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import NotFound from './NotFound'
+import img from '../assests/img/cartEmpty.png'
+
 
 const CartScreen = ({ match, location, history }) => {
   const dispatch = useDispatch()
@@ -32,7 +34,25 @@ const CartScreen = ({ match, location, history }) => {
     <Row>
       {
         cartItems.length === 0 ? (
-          <NotFound />
+          <div className="col-lg-12">
+            <div className="error-section ptb-50">
+              <div>
+                <img src={img} alt="" style={{width:'45%', height:'35%'}} />
+              </div>
+              <div className="error-section-head"><h2>Your cart is currently empty.</h2></div>
+              <div className="error-section-details">
+                <p>
+                  Before proceed to checkout you must add some products to your shopping cart.
+                  You will find a lot of interesting products on our "Shop" page.
+                </p>
+              </div>
+              <div className="error-section-button">
+                <Link to='/'>
+                  <button className="button btn-primary">Continue Shopping</button>
+                </Link>
+              </div>
+            </div>
+          </div>
         ) : (
           <>
             <Col md={8}>

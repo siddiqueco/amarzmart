@@ -151,6 +151,8 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
   }
 };
 
+
+
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -193,6 +195,8 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     });
   }
 };
+
+
 
 export const listUsers = () => async (dispatch, getState) => {
   try {

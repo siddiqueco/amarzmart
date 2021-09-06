@@ -27,10 +27,20 @@ const HomeScreen = ({ match }) => {
     const { loading: loadingTop, products: topRatedProduct } = topRatedProductList
 
 
+    const myTopRatedProduct=()=>{
+        let product= [...products].filter(p=> p.countInStock !==0 )
+
+        console.log(product)
+    }
+
+
     useEffect(() => {
         dispatch(listProducts(keyword, pageNumber))
         dispatch(listTopProducts())
+        myTopRatedProduct()
     }, [dispatch, keyword, pageNumber])
+
+
 
 
     return (
@@ -61,7 +71,7 @@ const HomeScreen = ({ match }) => {
                 text='Latest Products'
                 textColor='#F57224'
                 iconColor='#ffae00'
-                ico                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         n={<i class="far fa-smile-beam"></i>}
+                ico n={<i class="far fa-smile-beam"></i>}
             />
             {loading ?
                 <Loader /> : error ? (

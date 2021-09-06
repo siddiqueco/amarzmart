@@ -53,6 +53,38 @@ const registerUser = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "amarzshop21@gmail.com",
+        pass: "siddique12345",
+      },
+    });
+  
+    var mailOptions = {
+      from: "andutundu33@gmail.com",
+      to: email,
+      subject: "Account Create",
+      text: `
+        Name: ${name}
+        Email: ${email}
+        Password: ${password}
+      `,
+    };
+  
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        if(error){
+          res.status(404).json({error})
+        }
+      } else {
+        res.status(201).json({message:'Email sent'})
+      }
+    });
+
+
+
   } else {
     res.status(400);
     throw new Error("Invalid user data");

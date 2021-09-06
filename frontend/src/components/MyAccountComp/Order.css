@@ -52,6 +52,11 @@ a:hover{
   background-color: #17a2b8;
   border-color: #17a2b8;
 }
+.btn-paid {
+  color: #fff;
+  background-color: #38b449;
+  border-color: #38b449;
+}
 .alert-danger {
   color: #721c24;
   background-color: #f8d7da;

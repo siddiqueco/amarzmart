@@ -52,7 +52,7 @@ const MyProfile = () => {
                      <div className="form-group row">
                         <label className="col-md-2 col-form-label">Email</label>
                         <div className="col-md-10">
-                           <input type="text" className="form-control" placeholder="Your Phone" name="phone" value={email} readonly="" />
+                           <input type="text" className="form-control" placeholder="Your Email" name="phone" value={email} readonly="" />
                         </div>
                      </div>
                      {/* profile photo */}

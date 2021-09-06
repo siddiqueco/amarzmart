@@ -24,7 +24,7 @@ const Header = () => {
   ]
   return (
     <header >
-      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect >
+      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect className='fixed-top' style={{marginBottom:'20px'}}>
         <Container>
           <LinkContainer to='/' style={{ fontSize: '1.5rem' }} >
             <Navbar.Brand >Amarshop<i className='fab fa-typo3 header-brand-icon' /></Navbar.Brand>

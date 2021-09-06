@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom'
 import './Order.css'
 
 
-const Order = ({order}) => {
-   const paidStatus= order.isDeliverd? 'Paid': 'Unpaid' 
-   const status= order.isDeliverd? 'Delivered':'Processing'
+const Order = ({ order }) => {
+   const paidStatus = order.isPaid ? 'Paid' : 'Unpaid'
+
+   const status = order.isDeliverd ? 'Delivered' : 'Processing'
+   const paidClass = order.isPaid ? 'btn-paid' : 'btn-danger'
+
 
    return (
       <div className="order my-pd-rw bor-re shad hb-ef">
@@ -20,7 +23,7 @@ const Order = ({order}) => {
          <div className="my-pd-pr my-w20">
             <div className="">
                <Link href="/account/orders" classNameName='text-warning'>
-                &#2547;{order.totalPrice}
+                  &#2547;{order.totalPrice}
                </Link>
             </div>
          </div>
@@ -28,15 +31,15 @@ const Order = ({order}) => {
          <div className="my-pd-sts my-w30 text-right">
             <div className="btn-group btn-group-sm my-button" role="group" aria-label="Basic example">
                <button type="button" className="btn btn-info">{status}</button>
-               <button type="button" className="btn btn-danger">{paidStatus}</button>
+               <button type="button" className={`btn ${paidClass}`}>{paidStatus}</button>
             </div>
          </div>
 
-         <div class="my-w10 text-center my-pd-inv">
-            <a class="ml-2 btn btn-soft-warning btn-icon btn-circle btn-sm" href="https://www.sirajganjshop.com/invoice/551788" title="Download Invoice">
-               <i class="las la-download"></i>
+         {/* <div className="my-w10 text-center my-pd-inv">
+            <a className="ml-2 btn btn-soft-warning btn-icon btn-circle btn-sm" href="https://www.sirajganjshop.com/invoice/551788" title="Download Invoice">
+               <i className="las la-download"></i>
             </a>
-         </div>
+         </div> */}
       </div>
    )
 }
