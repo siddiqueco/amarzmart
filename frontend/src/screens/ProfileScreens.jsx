@@ -76,8 +76,8 @@ const ProfileScreens = ({ location, history }) => {
 
 
     return (
-        <Row>
-            <Col md={3}>
+        <>
+            <Col md={5} >
                 <h2>User Profile</h2>
                 {message && <Message variant='danger'>{message}</Message>}
                 {error && <Message variant='danger'>{error}</Message>}
@@ -129,7 +129,7 @@ const ProfileScreens = ({ location, history }) => {
                     </Button>
                 </Form>
             </Col>
-            <Col md={9}>
+            {/* <Col md={9}>
                 <h2>My Orders</h2>
                 {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> : (
                     <Table striped bordered hover responsive className='table-sm'>
@@ -165,8 +165,8 @@ const ProfileScreens = ({ location, history }) => {
                     </Table>
                 )}
 
-            </Col>
-        </Row>
+            </Col> */}
+        </>
     )
 }
 

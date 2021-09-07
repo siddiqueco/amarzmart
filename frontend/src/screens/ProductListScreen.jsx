@@ -71,7 +71,8 @@ const ProductListScreen = ({ history, match }) => {
   }
 
   return (
-    <>
+    <Col md={12}>
+    
       <Row className='align-items-center'>
         <Col>
           <h1>Products</h1>
@@ -92,7 +93,7 @@ const ProductListScreen = ({ history, match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Table striped bordered hover responsive className='table-sm'>
+          <Table striped bordered hover responsive className='table-sm '>
             <thead>
               <tr>
                 <th>ID</th>
@@ -107,7 +108,7 @@ const ProductListScreen = ({ history, match }) => {
               {products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
-                  <td>{product.name}</td>
+                  <td>{product.name.slice(0,20)+ ' . .'}</td>
                   <td><span className='tk'>৳</span>{product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
@@ -132,7 +133,7 @@ const ProductListScreen = ({ history, match }) => {
           <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
-    </>
+    </Col>
   )
 }
 

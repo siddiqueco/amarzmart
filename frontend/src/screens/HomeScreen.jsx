@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -27,11 +27,12 @@ const HomeScreen = ({ match }) => {
     const { loading: loadingTop, products: topRatedProduct } = topRatedProductList
 
 
-    const myTopRatedProduct=()=>{
-        let product= [...products].filter(p=> p.countInStock !==0 )
+    const myTopRatedProduct = () => {
+        let product = [...products].filter(p => p.countInStock !== 0)
 
         console.log(product)
     }
+  
 
 
     useEffect(() => {
@@ -48,23 +49,27 @@ const HomeScreen = ({ match }) => {
             <Meta />
             {!keyword ? <ProductCarousel /> : <Link to='/' className='btn btn-light'>Go Back</Link>}
 
-            <Title
-                text='Top Product'
-                textColor='#fa9e48'
-                iconColor='#e68332'
-                icon={<i className="fas fa-fire"></i>}
-            />
-            {
-                loadingTop ? <Loader /> : (
-                    <Row>
-                        {topRatedProduct && topRatedProduct.map((product) => (
-                            <Col key={product._id} sm={4} md={3} lg={2.5} xl={2}>
-                                <Product product={product} />
-                            </Col>
-                        ))}
-                    </Row>
-                )
-            }
+            {!keyword && (
+                <>
+                    <Title
+                        text='Popular Product'
+                        textColor='#fa9e48'
+                        iconColor='#e68332'
+                        icon={<i className="fas fa-fire"></i>}
+                    />
+                    {
+                        loadingTop ? <Loader /> : (
+                            <Row>
+                                {topRatedProduct && topRatedProduct.map((product) => (
+                                    <Col key={product._id} sm={4} md={3} lg={2.5} xl={2}>
+                                        <Product product={product} />
+                                    </Col>
+                                ))}
+                            </Row>
+                        )
+                    }
+                </>
+            )}
 
             {/* <h2 className='mt-3 text-center-sm'>Latest Products</h2> */}
             <Title

@@ -7,7 +7,7 @@ const Order = ({ order }) => {
    const paidStatus = order.isPaid ? 'Paid' : 'Unpaid'
 
    const status = order.isDeliverd ? 'Delivered' : 'Processing'
-   const paidClass = order.isPaid ? 'btn-paid' : 'btn-danger'
+   const paidClass = order.isPaid ? 'btn-warning' : 'btn-danger'
 
 
    return (
@@ -23,15 +23,15 @@ const Order = ({ order }) => {
          <div className="my-pd-pr my-w20">
             <div className="">
                <Link href="/account/orders" classNameName='text-warning'>
-                  &#2547;{order.totalPrice}
+                  <strong>&#2547;</strong> {order.totalPrice}
                </Link>
             </div>
          </div>
 
          <div className="my-pd-sts my-w30 text-right">
             <div className="btn-group btn-group-sm my-button" role="group" aria-label="Basic example">
-               <button type="button" className="btn btn-info">{status}</button>
-               <button type="button" className={`btn ${paidClass}`}>{paidStatus}</button>
+               <button type="button" className={`btn ${order.isDeliverd ? 'btn-success': 'btn-info'}`}>{status}</button>
+               <button type="button" className={`btn ${paidClass}`} >{paidStatus}</button>
             </div>
          </div>
 

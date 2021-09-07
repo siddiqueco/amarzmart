@@ -2,16 +2,19 @@ import React from 'react'
 import { Row, Col, Container, Nav, Navbar } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Route } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Dashboard from '../components/MyAccountComp/MyDashboard'
 import MyProfile from '../components/MyAccountComp/MyProfile'
 import MyOrders from '../components/MyAccountComp/MyOrders'
 import Title from '../components/TitleComp/Title'
 
-const MyCoountScreen = ({ location,match }) => {
+const MyCoountScreen = ({ location, match }) => {
 
    const pathName = location.pathname
 
- 
+   const userLogin = useSelector((state) => state.userLogin)
+   const { userInfo } = userLogin
+
    return (
       <section className='user-account mt-4 mb-3'>
          <Container>
@@ -29,14 +32,18 @@ const MyCoountScreen = ({ location,match }) => {
                         <Navbar className='justify-content-center'>
                            <Nav className="flex-column text-center">
                               <LinkContainer to="/account" exact as='div' activeClassName='bg-warning text-light shadow'>
-                                 <Nav.Link><i class="fas fa-vector-square"></i>  DASHBOARD</Nav.Link>
+                                 <Nav.Link><i className="fas fa-vector-square"></i>  DASHBOARD</Nav.Link>
                               </LinkContainer>
                               <LinkContainer to="/account/profile" activeClassName='bg-warning text-white shadow'>
-                                 <Nav.Link ><i class="far fa-user"></i>  My Profile</Nav.Link>
+                                 <Nav.Link ><i className="far fa-user"></i>  My Profile</Nav.Link>
                               </LinkContainer>
-                              <LinkContainer to="/account/orders" activeClassName='bg-warning text-white shadow'>
-                                 <Nav.Link ><i class="far fa-file-alt"></i>    Orders History</Nav.Link>
-                              </LinkContainer>
+
+                              {
+                                 !userInfo.isAdmin &&
+                                 <LinkContainer to="/account/orders" activeClassName='bg-warning text-white shadow'>
+                                    <Nav.Link ><i className="far fa-file-alt"></i> Orders History</Nav.Link>
+                                 </LinkContainer>
+                              }
                            </Nav>
                         </Navbar>
                      </div>

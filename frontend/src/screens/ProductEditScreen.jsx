@@ -100,7 +100,7 @@ const ProductEditScreen = ({ match, history }) => {
   
   return (
     <>
-      <Link to='/admin/productlist' className='btn btn-light my-3'>
+      <Link to='/admin/productlist' className='btn btn-primary my-3'>
         Go Back
       </Link>
       <FormContainer>
@@ -146,6 +146,7 @@ const ProductEditScreen = ({ match, history }) => {
                 label='Choose File'
                 custom
                 onChange={uploadFileHandler}
+                className='btn-primary'
               ></Form.File>
               {uploading && <Loader />}
             </Form.Group>
@@ -187,10 +188,11 @@ const ProductEditScreen = ({ match, history }) => {
                 placeholder='Enter description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                style={{minHeight:'150px'}}
               ></Form.Control>
             </Form.Group>
 
-            <Button type='submit' variant='primary'>
+            <Button type='submit' variant='primary' style={{display:'block', fontSize:'13px'}}>
               Update
             </Button>
           </Form>
