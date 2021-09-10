@@ -6,9 +6,11 @@ import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails, deliverOrder,payOrder } from '../actions/orderAction'
+import { getOrderDetails, deliverOrder, payOrder } from '../actions/orderAction'
 import { ORDER_DELIVER_RESET } from '../constants/orderConstant'
-import {ORDER_PAY_RESET} from '../constants/orderConstant'
+import { ORDER_PAY_RESET } from '../constants/orderConstant'
+import { formatDate } from '../utils/formatDate'
+import { toast } from 'react-toastify';
 
 const OrderScreen = ({ match, history }) => {
 
@@ -57,13 +59,15 @@ const OrderScreen = ({ match, history }) => {
                 setSdkReady(true)
             }
             document.body.appendChild(script)
-            console.log(clientId)
         }
 
 
-        if (!order || successDeliver || successPay) {
+        if (!order || successDeliver || successPay || order._id !== orderId) {
+
             dispatch({ type: ORDER_PAY_RESET })
+
             dispatch({ type: ORDER_DELIVER_RESET })
+
             dispatch(getOrderDetails(orderId))
         } else if (!order.isPaid) {
             if (!window.paypal) {
@@ -82,7 +86,25 @@ const OrderScreen = ({ match, history }) => {
     }
 
     const deliverHandler = () => {
-        dispatch(deliverOrder(order))
+
+        if (order.paymentMethod === 'PayPal') {
+            if (order.isPaid) {
+                dispatch(deliverOrder(order))
+            } else {
+                toast.info('Customer needs to pay!', {
+                    position: "top-right",
+                    autoClose: 2500,
+                    hideProgressBar: true,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+        } else {
+            dispatch(deliverOrder(order))
+        }
+        // console.log(order)
     }
 
     return (
@@ -91,8 +113,8 @@ const OrderScreen = ({ match, history }) => {
                 <h1>Order ID: {order._id}</h1>
                 <Row>
                     <Col md={8}>
-                        <ListGroup variant='flush'>
-                            <ListGroup.Item>
+                        <ListGroup variant='flush' >
+                            <ListGroup.Item className='shadow mb-2 rounded'>
                                 <h2>Shipping</h2>
                                 <p>
                                     <strong>Name: </strong>{order.user.name}
@@ -110,18 +132,18 @@ const OrderScreen = ({ match, history }) => {
                                     {order.shippingAddress.country}
                                 </p>
                                 {order.isDelivered ? (
-                                    <Message variant='success'>Delivered On {order.deliveredAt}</Message>
+                                    <Message style={{ background: '#38b449' }}>Delivered On  <strong>{formatDate(order.deliveredAt)}</strong></Message>
                                 ) : (
                                     <Message variant='danger'>Not delivered</Message>
                                 )}
                             </ListGroup.Item>
 
-                            <ListGroup.Item>
+                            <ListGroup.Item className='shadow mb-2 rounded'>
                                 <h2>Payment Method</h2>
                                 <strong>Method: </strong>
                                 {order.paymentMethod}
                                 {order.isPaid ? (
-                                    <Message variant='success'>Paid on <b>{order.paidAt}</b></Message>
+                                    <Message style={{ background: '#38b449'}} className='shadow-sm'>Paid on <strong>{formatDate(order.paidAt)}</strong></Message>
                                 ) : (
                                     <Message variant='danger'>Not Paid</Message>
                                 )}
@@ -161,7 +183,7 @@ const OrderScreen = ({ match, history }) => {
                         </ListGroup>
                     </Col>
                     <Col md={4}>
-                        <Card>
+                        <Card className='shadow mb-2 rounded'>
                             <ListGroup variant='flush'>
                                 <ListGroup.Item>
                                     <h2>Order Summary</h2>
@@ -194,24 +216,31 @@ const OrderScreen = ({ match, history }) => {
                                         <Col><span className='tk'>৳</span> {order.totalPrice}</Col>
                                     </Row>
                                 </ListGroup.Item>
-                                {!order.isPaid && (
+
+                                {!order.isPaid && !userInfo.isAdmin && (
                                     <ListGroup.Item>
                                         {loadingPay && <Loader />}
-                                        {!sdkReady ? (
+                                        {/* {!sdkReady ? (
                                             <Loader />
                                         ) : (
                                             <PayPalButton
                                                 amount={order.totalPrice}
                                                 onSuccess={successPaymentHandler}
                                             />
-                                        )}
+                                        )} */}
+
+                                        <PayPalButton
+                                            amount={order.totalPrice}
+                                            onSuccess={successPaymentHandler}
+                                        />
+
                                     </ListGroup.Item>
                                 )}
 
                                 {loadingDeliver && <Loader />}
                                 {userInfo && userInfo.isAdmin && !order.isDelivered && (
                                     <ListGroup.Item>
-                                        <Button type='button' className='btn btn-block' onClick={deliverHandler}>
+                                        <Button type='button' className='btn btn-block' onClick={deliverHandler} style={{ fontSize: '16px' }}>
                                             Mark as Delivered
                                         </Button>
                                     </ListGroup.Item>

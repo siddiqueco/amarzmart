@@ -5,7 +5,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import SearchBox from './SearchBox'
 import { logout } from '../actions/userAction'
-
+import logo from '../assests/img/logo.png'
+import Logo from './Logo/logo'
 
 const Header = () => {
 
@@ -27,25 +28,27 @@ const Header = () => {
       <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect className='fixed-top' style={{ marginBottom: '20px' }}>
         <Container>
           <LinkContainer to='/' style={{ fontSize: '1.5rem' }} >
-            <Navbar.Brand >Amarshop<i className='fab fa-typo3 header-brand-icon' /></Navbar.Brand>
+            <Navbar.Brand >
+              {/* <img src={logo} alt="" style={{width:'200px'}} /><i className='fab fa-typo3 header-brand-icon' /> */}
+              <Logo />
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ml-auto">
               <LinkContainer to='/cart'>
-                <Nav.Link className='text-sm'>
+                <Nav.Link className='text-sm text-light'>
                   <span className='header-cart-icon'>
                     <i className="fas fa-shopping-cart text-sm"></i>
-
                   </span>
-                  <span className='badge header-cart-icon-value'>
+                  <span className='badge header-cart-icon-value text-light'>
                     {cartItems.reduce((acc, item) => acc + item.qty, 0)}
                   </span>
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username' className='text-sm'>
+                <NavDropdown title={userInfo.name} id='username' className='text-sm text-light'>
 
                   <LinkContainer to='/account'>
                     <NavDropdown.Item>My Account</NavDropdown.Item>
@@ -86,7 +89,7 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-{/* 
+              {/* 
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin Panel' id='adminmenu'>
 

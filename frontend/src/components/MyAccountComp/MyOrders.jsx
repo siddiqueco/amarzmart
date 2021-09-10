@@ -7,6 +7,7 @@ import Order from './Order'
 import Loader from '../Loader'
 import './MyOrders.css'
 import { Link } from 'react-router-dom'
+import { Row } from 'react-bootstrap'
 
 const MyProfile = ({match}) => {
    console.log(match)
@@ -22,6 +23,12 @@ const MyProfile = ({match}) => {
    const orderListMy = useSelector((state) => state.orderListMy)
    const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
 
+
+   const orderPay = useSelector((state) => state.orderPay)
+    const { loading: loadingPay, success: successPay } = orderPay
+
+
+
    useEffect(() => {
       
       if (!userInfo) {
@@ -32,11 +39,14 @@ const MyProfile = ({match}) => {
             dispatch(listMyOrders())
          }
       }
-   }, [dispatch, userInfo, user])
+   }, [dispatch, userInfo, user, successPay])
 
    return (
       <div className="col-md-9 ">
          <Title text='Order History' className="small-title" />
+         <div className=''>
+            <h5>Total Order: {orders && orders.length}</h5>
+         </div>
          <div className="user-account-content-tab p-0 ">
             <div class="row mt-2">
                <div class="col-lg-12">

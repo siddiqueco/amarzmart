@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { CART_CLEAR_ITEMS } from "../constants/cartConstant";
 import {
   ORDER_CREATE_REQUEST,
@@ -18,7 +19,7 @@ import {
   ORDER_DELIVER_REQUEST,
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
-  ORDER_PAY_FAIL
+  ORDER_PAY_FAIL,
 } from "../constants/orderConstant";
 import { logout } from "./userAction";
 
@@ -204,6 +205,15 @@ export const payOrder =
         type: ORDER_PAY_SUCCESS,
         payload: data,
       });
+      toast.success("Payment succesfull", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -245,6 +255,8 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
       type: ORDER_DELIVER_SUCCESS,
       payload: data,
     });
+
+    
   } catch (error) {
     const message =
       error.response && error.response.data.message

@@ -2,13 +2,16 @@ import React from 'react';
 import './Footer.css';
 // import Button  from './Button';
 import { Link } from 'react-router-dom';
+import Logo from '../Logo/logo'
 
 function Footer() {
   return (
     <div className='footer-container'>
       <section className='footer-subscription'>
+
         <p className='footer-subscription-heading'>
-          Amarshop<i className='fab fa-typo3' /> believe in yourself || dame kom mane valo
+          {/* Amarzshop<i className='fab fa-typo3' />   */}
+          <Logo /> believe in yourself || dame kom mane valo
         </p>
         <p className='footer-subscription-text'>
           You can unsubscribe at any time.
@@ -21,7 +24,7 @@ function Footer() {
               type='email'
               placeholder='Your Email'
             />
-            <button className='btn btn-outline-success footer-buttton'>Subscribe</button>
+            <button className='btn btn-primary footer-buttton'>Subscribe</button>
           </form>
         </div>
       </section>
@@ -92,8 +95,7 @@ function Footer() {
         <div className='social-media-wrap'>
           <div className='footer-logo'>
             <Link to='/' className='social-logo'>
-              Amarshop
-              <i className='fab fa-typo3' />
+              <Logo />
             </Link>
           </div>
           <small className='website-rights'>© 2021 Amarshop All rights reserved.</small>

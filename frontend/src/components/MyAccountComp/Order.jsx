@@ -6,9 +6,10 @@ import './Order.css'
 const Order = ({ order }) => {
    const paidStatus = order.isPaid ? 'Paid' : 'Unpaid'
 
-   const status = order.isDeliverd ? 'Delivered' : 'Processing'
+   const orderStatus = order.isDelivered ? 'Delivered' : 'Processing'
    const paidClass = order.isPaid ? 'btn-warning' : 'btn-danger'
 
+console.log(order)
 
    return (
       <div className="order my-pd-rw bor-re shad hb-ef">
@@ -30,7 +31,7 @@ const Order = ({ order }) => {
 
          <div className="my-pd-sts my-w30 text-right">
             <div className="btn-group btn-group-sm my-button" role="group" aria-label="Basic example">
-               <button type="button" className={`btn ${order.isDeliverd ? 'btn-success': 'btn-info'}`}>{status}</button>
+               <button type="button" className={`btn ${order.isDelivered ? 'btn-success': 'btn-info'}`}>{orderStatus}</button>
                <button type="button" className={`btn ${paidClass}`} >{paidStatus}</button>
             </div>
          </div>

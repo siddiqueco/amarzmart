@@ -29,7 +29,7 @@ const App = () => {
 
       <Header />
       <main className="py-3" style={{
-        marginTop:"56px"
+        marginTop:"78px"
       }}>
         <ToastContainer autoClose={1500} closeOnClick={false} />
         <Container>

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Title from '../TitleComp/Title'
 
@@ -10,16 +10,19 @@ const Dashboard = () => {
    const cart = useSelector((state) => state.cart)
    const { cartItems } = cart
 
-   useEffect(()=>{
+   const orderListMy = useSelector((state) => state.orderListMy)
+   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
 
-   },[])
+   useEffect(() => {
+
+   }, [])
 
    return (
       <>
          <div className="col-md-9">
             <div className="row">
                <div class="col-12">
-                  <Title text='Dashboard' className='page-heading'/>
+                  <Title text='Dashboard' className='page-heading' />
                </div>
             </div>
             <div className="row ">
@@ -45,7 +48,7 @@ const Dashboard = () => {
                   <div className="bg-grad-3 text-white rounded-lg mb-4 overflow-hidden">
                      <div className="px-3 pt-3">
                         <div className="h3 fw-700"> Orders</div>
-                        <div className="opacity-50">My Order</div>
+                        <div className="opacity-50">My Order {orders && orders.length}</div>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                         <path

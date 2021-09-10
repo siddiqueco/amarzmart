@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Order from "../modals/orederModel.js";
 import nodemailer from "nodemailer";
-import User from '../modals/userModel.js'
+import User from "../modals/userModel.js";
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Private
@@ -15,8 +15,9 @@ const addOrderItems = asyncHandler(async (req, res) => {
     shippingPrice,
     totalPrice,
   } = req.body;
-  const oldUser = await User.findById(req.user._id)
- 
+
+  const oldUser = await User.findById(req.user._id);
+
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No order items");
@@ -46,14 +47,21 @@ const addOrderItems = asyncHandler(async (req, res) => {
     var mailOptions = {
       from: "andutundu33@gmail.com",
       to: oldUser.email,
-      subject: "Account Created",
+      subject: "Amarzshop - Your order is placed order",
       html: `
-        <h2>WElcome in Amarzshop</h2>
-        <ul>
-          <li>Order ID:</li>
+
+        <h2>Hi ${oldUser.name},</h2>
+        <p>Thank you for ordering from Amarzshop!</p>
+        <p>Please note, we are unable to change your delivery address once your order is placed.​</p>
+
+
+        <h3><b>DELIVERY DETAILS</b></h3>
+        <ul style="list-style-type:none;">
+          <li>Name:     ${oldUser.name}</li>
+          <li>Shipping Address: ${createdOrder.shippingAddress}</li>
+          <li>Email: ${oldUser.email}</li>
           <li>Payment Method: ${paymentMethod}</li>
           <li>Total: ${totalPrice}</li>
-          <li>Shipping Address: ${shippingPrice}</li>
         </ul>
         `,
     };
@@ -86,39 +94,30 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 });
 
-
-
 // @desc    Update order to paid
 // @route   GET /api/orders/:id/pay
 // @access  Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id)
+  const order = await Order.findById(req.params.id);
 
   if (order) {
-    order.isPaid = true
-    order.paidAt = Date.now()
+    order.isPaid = true;
+    order.paidAt = Date.now();
     order.paymentResult = {
       id: req.body.id,
       status: req.body.status,
       update_time: req.body.update_time,
       email_address: req.body.payer.email_address,
-    }
+    };
 
-    const updatedOrder = await order.save()
+    const updatedOrder = await order.save();
 
-    res.json(updatedOrder)
+    res.json(updatedOrder);
   } else {
-    res.status(404)
-    throw new Error('Order not found')
+    res.status(404);
+    throw new Error("Order not found");
   }
-})
-
-
-
-
-
-
-
+});
 
 // @desc    Update order to delivered
 // @route   GET /api/orders/:id/deliver

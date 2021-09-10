@@ -1,12 +1,11 @@
-:root {
-  --bg-primary: #f7f8fa;
-  --bg-primar2: #f2f3f8;
-}
+
 :root {
   --primary: #38b449;
   --hov-primary: #28a745;
   --soft-primary: rgba(56,180,73,0.15);
   --bg-footer: #111723;
+  --bg-primary: #f7f8fa;
+  --bg-primar2: #f2f3f8;
 }
 a,
 button,
@@ -65,13 +64,24 @@ h2 {
   color: #fff;
 }
 
-.carousel img {
+.carosel-product-image {
   height: 320px;
   padding: 10px;
   margin: 40px;
   border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
+}
+.carosel-campaign-image {
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel-indicators li{
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: var(--bg-primary);
 }
 .carousel a {
   margin: 0 auto;

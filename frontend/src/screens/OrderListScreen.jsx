@@ -47,11 +47,12 @@ const OrderListScreen = ({ history }) => {
               <th>DATE</th>
               <th>TOTAL</th>
               <th>DELIVERED</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order._id}>
+              <tr key={order._id} className='text-center'>
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
@@ -63,7 +64,7 @@ const OrderListScreen = ({ history }) => {
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
-                <td>
+                <td className='text-center'>
                   <LinkContainer to={`/orders/${order._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
                       Details
