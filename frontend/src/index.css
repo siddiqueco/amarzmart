@@ -83,6 +83,7 @@ h2 {
   height: 10px;
   background-color: var(--bg-primary);
 }
+
 .carousel a {
   margin: 0 auto;
 }
@@ -94,4 +95,9 @@ h2 {
 
 .container {
   padding: 0 !important;
+}
+
+.checkout-step{
+  color: var(--primary);
+  font-weight: 600;
 }

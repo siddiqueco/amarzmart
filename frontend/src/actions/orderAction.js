@@ -103,7 +103,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   }
 };
 
-export const listMyOrders = () => async (dispatch, getState) => {
+export const listMyOrders = (orderFilter='paid') => async (dispatch, getState) => {
   try {
     dispatch({
       type: ORDER_LIST_MY_REQUEST,
@@ -119,7 +119,21 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/myorders`, config);
+    let { data } = await axios.get(`/api/orders/myorders`, config);
+
+
+    if (orderFilter === "paid") {
+       data = data.filter((d) => Boolean(d.isPaid));
+    }  
+
+    if (orderFilter === "unpaid") {
+       data = data.filter((d) => Boolean(!d.isPaid));
+    } 
+    if (orderFilter === "processing") {
+       data = data.filter((d) => Boolean(!d.isDelivered));
+    } 
+    
+
 
     dispatch({
       type: ORDER_LIST_MY_SUCCESS,
@@ -255,8 +269,6 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
       type: ORDER_DELIVER_SUCCESS,
       payload: data,
     });
-
-    
   } catch (error) {
     const message =
       error.response && error.response.data.message

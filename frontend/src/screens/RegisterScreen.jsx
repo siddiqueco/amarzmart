@@ -7,8 +7,7 @@ import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userAction'
 import randomPassword from '../utils/generatePassword'
-// import nodemailer from 'nodemailer'
-// import toogglerPassword from '../components/tooglerPassword'
+
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -39,7 +38,6 @@ const RegisterScreen = ({ location, history }) => {
   const generatePassword = () => {
     if (!suggstPass)
       setSuggestPass(randomPassword)
-      console.log(suggstPass)
   }
 
   const togglePass = () => {
@@ -52,9 +50,6 @@ const RegisterScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-
-
-
       dispatch(register(name, email, password))
     }
   }

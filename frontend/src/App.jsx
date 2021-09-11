@@ -28,9 +28,7 @@ const App = () => {
     <Router>
 
       <Header />
-      <main className="py-3" style={{
-        marginTop:"78px"
-      }}>
+      <main className="py-3" style={{marginTop:"78px"}}>
         <ToastContainer autoClose={1500} closeOnClick={false} />
         <Container>
           {/* <Route path='/order/:id' component={OrderScreen} /> */}

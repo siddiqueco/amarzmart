@@ -9,7 +9,7 @@ import { listMyOrders } from '../../actions/orderAction'
 import { toast } from 'react-toastify'
 import Title from '../TitleComp/Title'
 
-const MyProfile = ({history}) => {
+const MyProfile = ({ history }) => {
 
    const [name, setName] = useState('')
    const [email, setEmail] = useState('')
@@ -24,6 +24,7 @@ const MyProfile = ({history}) => {
 
    const userLogin = useSelector((state) => state.userLogin)
    const { userInfo } = userLogin
+   const { name: newName } = userInfo
 
    const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
    const { success } = userUpdateProfile
@@ -35,17 +36,18 @@ const MyProfile = ({history}) => {
 
    useEffect(() => {
       if (!userInfo) {
-          history.push('/login')
+         history.push('/login')
       } else {
-          if (!user.name) {
-              dispatch(getUserDetails('profile'))
-              dispatch(listMyOrders())
-          } else {
-              setName(user.name)
-              setEmail(user.email)
-          }
+         if (!user.name) {
+            dispatch(getUserDetails('profile'))
+            dispatch(listMyOrders())
+         } else {
+            setName(user.name)
+            setEmail(user.email)
+         }
+        
       }
-  }, [dispatch, history, userInfo, user])
+   }, [dispatch, history, userInfo, user, newName])
 
    const submitHandler = (e) => {
       e.preventDefault()
@@ -87,7 +89,7 @@ const MyProfile = ({history}) => {
          <div className="user-account-content-tab">
             <div className="card">
                <div className="card-header">
-                  <Title text='Basic Info'/>
+                  <Title text='Basic Info' />
                </div>
                <div className="card-body">
                   <form onSubmit={submitHandler}>

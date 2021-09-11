@@ -1,8 +1,9 @@
 import React from 'react';
 import './Footer.css';
-// import Button  from './Button';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/logo'
+import paypalLogo from '../../assests/img/paypal.png'
+
 
 function Footer() {
   return (
@@ -93,13 +94,12 @@ function Footer() {
       </div>
       <section className='social-media'>
         <div className='social-media-wrap'>
-          <div className='footer-logo'>
-            <Link to='/' className='social-logo'>
-              <Logo />
-            </Link>
-          </div>
+          
           <small className='website-rights'>© 2021 Amarshop All rights reserved.</small>
           {/* social icons */}
+          <div className='footer-logo'>
+            <img src={paypalLogo} alt="we are acception paypal" className='social-logo' style={{width:'150px'}}/>
+          </div>
         </div>
       </section>
     </div>

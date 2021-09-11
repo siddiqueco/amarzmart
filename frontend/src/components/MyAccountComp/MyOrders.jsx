@@ -7,10 +7,12 @@ import Order from './Order'
 import Loader from '../Loader'
 import './MyOrders.css'
 import { Link } from 'react-router-dom'
-import { Row } from 'react-bootstrap'
+import { Row, Form,Badge } from 'react-bootstrap'
 
-const MyProfile = ({match}) => {
-   console.log(match)
+const MyProfile = ({ match }) => {
+
+   const [orderFilter, setOrderFilter] = useState('all')
+
    const dispatch = useDispatch()
 
    const userLogin = useSelector((state) => state.userLogin)
@@ -25,28 +27,46 @@ const MyProfile = ({match}) => {
 
 
    const orderPay = useSelector((state) => state.orderPay)
-    const { loading: loadingPay, success: successPay } = orderPay
+   const { loading: loadingPay, success: successPay } = orderPay
 
 
 
    useEffect(() => {
-      
+
       if (!userInfo) {
          //  history.push('/login')
       } else {
          if (!user.name) {
             dispatch(getUserDetails('profile'))
-            dispatch(listMyOrders())
+            dispatch(listMyOrders(orderFilter))
          }
+         dispatch(listMyOrders(orderFilter))
       }
-   }, [dispatch, userInfo, user, successPay])
+   }, [dispatch, userInfo, user, successPay, orderFilter])
 
+   const handleSelect = (e) => {
+      setOrderFilter(e.target.value)
+   }
    return (
       <div className="col-md-9 ">
          <Title text='Order History' className="small-title" />
-         <div className=''>
-            <h5>Total Order: {orders && orders.length}</h5>
+         <div className='d-flex justify-content-between'>
+            <>
+               <h5>Total Order: <Badge className='btn-primary'>{orders && orders.length}</Badge></h5>
+               <select
+                  value={orderFilter}
+                  onChange={handleSelect}
+                  className='form-select rounded btn-primary py-2'
+               >
+                  <option value="all">All</option>
+                  <option value="processing">Processing</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="paid">Paid</option>
+                  <option value="unpaid">Unpaid</option>
+               </select>
+            </>
          </div>
+
          <div className="user-account-content-tab p-0 ">
             <div class="row mt-2">
                <div class="col-lg-12">

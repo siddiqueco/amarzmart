@@ -156,7 +156,7 @@ const OrderScreen = ({ match, history }) => {
                                 ) : (
                                     <ListGroup variant='flush'>
                                         {order.orderItems.map((item, index) => (
-                                            <ListGroup.Item key={index}>
+                                            <ListGroup.Item key={index} className='shadow-sm mb-2 rounded'>
                                                 <Row>
                                                     <Col md={1}>
                                                         <Image

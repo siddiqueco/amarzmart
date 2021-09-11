@@ -10,6 +10,7 @@ import FormContainer from '../components/FormContainer'
 const LoginScreen = ({ location, history }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isPassShow, setIsPassShow] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -31,6 +32,10 @@ const LoginScreen = ({ location, history }) => {
         dispatch(login(email, password))
 
     }
+    const togglePass = () => {
+        setIsPassShow(!isPassShow)
+    }
+
 
     return (
         <FormContainer>
@@ -51,14 +56,18 @@ const LoginScreen = ({ location, history }) => {
                 <Form.Group controlId='password'>
                     <Form.Label>Password Address</Form.Label>
                     <Form.Control
-                        type='password'
+                        type={`${isPassShow? 'text': 'password'}`}
                         placeholder='Enter password'
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     ></Form.Control>
+                    <i className={`fas ${isPassShow ? 'fa-eye-slash' : 'fa-eye'}`}
+                        style={{ position: 'absolute', top: '170px', right: '22px' }}
+                        onClick={togglePass}
+                    ></i>
                 </Form.Group>
                 <Button type='submit' variant='primary'>
-                    Submit
+                    Login
                 </Button>
             </Form>
 

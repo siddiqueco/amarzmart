@@ -66,7 +66,7 @@ const PlaceOrderScreen = ({ history }) => {
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
-            <ListGroup.Item>
+            <ListGroup.Item className='shadow mb-2 rounded'>
               <h2>Shipping</h2>
               <p>
                 <strong>Address:</strong>
@@ -78,7 +78,7 @@ const PlaceOrderScreen = ({ history }) => {
               </p>
             </ListGroup.Item>
 
-            <ListGroup.Item>
+            <ListGroup.Item className='shadow mb-2 rounded'> 
               <h2>Payment Method</h2>
               <strong>Method: </strong>
               {cart.paymentMethod}
@@ -91,7 +91,7 @@ const PlaceOrderScreen = ({ history }) => {
               ) : (
                 <ListGroup variant='flush'>
                   {cart.cartItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
+                    <ListGroup.Item key={index} className='shadow-sm mb-2 rounded'>
                       <Row>
                         <Col md={1}>
                           <Image
@@ -118,8 +118,8 @@ const PlaceOrderScreen = ({ history }) => {
           </ListGroup>
         </Col>
         <Col md={4}>
-          <Card>
-            <ListGroup variant='flush'>
+          <Card className='shadow mb-2 rounded'>
+            <ListGroup variant='flush' >
               <ListGroup.Item>
                 <h2>Order Summary</h2>
               </ListGroup.Item>
