@@ -50,7 +50,7 @@ const HomeScreen = ({ match }) => {
             {!keyword ? <ProductCarousel /> : <Link to='/' className='btn btn-light'>Go Back</Link>}
 
             {!keyword && (
-                <>
+                < >
                     <Title
                         text='Popular Product'
                         textColor='#fa9e48'
@@ -71,7 +71,6 @@ const HomeScreen = ({ match }) => {
                 </>
             )}
 
-            {/* <h2 className='mt-3 text-center-sm'>Latest Products</h2> */}
             <Title
                 text='Latest Products'
                 textColor='#F57224'

@@ -35,6 +35,12 @@ h2 {
   font-size: 1.4 rem;
   padding: 0.5rem 0;
 }
+p::selection, label::selection, text::selection{
+  color: #fff;
+  background-color: var(--primary);
+}
+
+
 .rating span {
   margin: 0.1rem;
   font-size: 0.875rem;
@@ -100,4 +106,9 @@ h2 {
 .checkout-step{
   color: var(--primary);
   font-weight: 600;
+}
+
+.product-center{
+  padding-top: 20px;
+  
 }

@@ -23,10 +23,13 @@ import NotFound from './screens/NotFound'
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 import MyAcountScreen from './screens/MyAcountScreen'
+import ScrollToTop from './utils/ScrollToTop'
+
+
 const App = () => {
   return (
     <Router>
-
+      <ScrollToTop />
       <Header />
       <main className="py-3" style={{marginTop:"78px"}}>
         <ToastContainer autoClose={1500} closeOnClick={false} />

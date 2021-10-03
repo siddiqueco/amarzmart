@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button } from 'react-bootstrap'
+import { Table, Button, Col, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listUsers, deleteUser } from '../actions/userAction'
 import { toast } from 'react-toastify'
 import Title from '../components/TitleComp/Title'
+
+
+
+
 
 const UserListScreen = ({ history }) => {
   const [admins, setAdmins] = useState([])
@@ -59,8 +63,52 @@ const UserListScreen = ({ history }) => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <>
-          {
+        users.map(user => (
+
+          <Row md={12} xl={9} className='shadow-sm mb-3 rounded product-center ' style={{ background: '#fff', cursor: 'pointer' }}>
+            <LinkContainer to={`/admin/user/${user._id}/edit`}>
+              <Col style={{ fontWeight: 700 }}>
+                <p>{user._id}</p>
+              </Col>
+            </LinkContainer>
+            <Col >
+              <p>{user.name}</p>
+            </Col>
+            <Col>
+              <p>{user.isAdmin ? 'ADMIN' : 'USER'}</p>
+            </Col>
+            <Col>
+              <p>{user.email}</p>
+            </Col>
+            <Col>
+              <Button
+                variant='danger'
+                className='btn-sm'
+                onClick={() => deleteHandler(user._id)}
+                style={{ marginLeft: '10px' }}
+              >
+                <i className='fas fa-trash'></i>
+              </Button>
+            </Col>
+          </Row>
+
+        ))
+      )}
+    </>
+  )
+}
+
+export default UserListScreen
+
+
+
+
+
+
+
+
+
+{/* {
             users && <Table  bordered hover responsive className='table-sm' >
               <thead>
                 <tr className='text-center'>
@@ -105,11 +153,4 @@ const UserListScreen = ({ history }) => {
                 ))}
               </tbody>
             </Table>
-          }
-        </>
-      )}
-    </>
-  )
-}
-
-export default UserListScreen
+          } */}
