@@ -1,4 +1,4 @@
-import React, { useEffect,memo } from 'react'
+import React, { useEffect, memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -10,7 +10,7 @@ import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
 import Meta from '../components/Meta'
 import Title from '../components/TitleComp/Title'
-// import SwiperJs from '../components/SwiperJs'
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 
@@ -32,7 +32,7 @@ const HomeScreen = ({ match }) => {
 
         console.log(product)
     }
-  
+
 
 
     useEffect(() => {
@@ -82,6 +82,7 @@ const HomeScreen = ({ match }) => {
                     <Message variant='danger'>{error}</Message>
                 ) : (
                     <>
+
                         <Row>
                             {products.map((product) => (
                                 <Col key={product._id} sm={4} md={3} lg={2.5} xl={2}>

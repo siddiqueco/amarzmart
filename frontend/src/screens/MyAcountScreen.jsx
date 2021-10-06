@@ -31,9 +31,13 @@ const MyCoountScreen = ({ location, match }) => {
                      <div className='user-account-content-sidebar'>
                         <Navbar className='justify-content-center'>
                            <Nav className="flex-column text-center">
-                              <LinkContainer to="/account" exact as='div' activeClassName='bg-warning text-light shadow'>
-                                 <Nav.Link><i className="fas fa-vector-square"></i>  DASHBOARD</Nav.Link>
-                              </LinkContainer>
+                              {
+                                 !userInfo.isAdmin &&
+                                 <LinkContainer to="/account" exact as='div' activeClassName='bg-warning text-light shadow'>
+                                    <Nav.Link><i className="fas fa-vector-square"></i>  DASHBOARD</Nav.Link>
+                                 </LinkContainer>
+                              }
+
                               <LinkContainer to="/account/profile" activeClassName='bg-warning text-white shadow'>
                                  <Nav.Link ><i className="far fa-user"></i>  My Profile</Nav.Link>
                               </LinkContainer>
